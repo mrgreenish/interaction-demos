@@ -1,10 +1,10 @@
 /*!
- * PathEditor 3.9.1
- * https://greensock.com
+ * PathEditor 3.12.4
+ * https://gsap.com
  *
- * Copyright 2008-2021, GreenSock. All rights reserved.
- * Subject to the terms at https://greensock.com/standard-license or for
- * Club GreenSock members, the agreement issued with that membership.
+ * Copyright 2008-2023, GreenSock. All rights reserved.
+ * Subject to the terms at https://gsap.com/standard-license or for
+ * Club GSAP members, the agreement issued with that membership.
  * @author: Jack Doyle, jack@greensock.com
 */
 
@@ -17,6 +17,8 @@ var _numbersExp = /(?:(-)?\d*\.?\d*(?:e[\-+]?\d+)?)[0-9]/ig,
     _supportsPointer,
     _win,
     _body,
+    gsap,
+    _context,
     _selectionColor = "#4e7fff",
     _minimumMovement = 1,
     _DEG2RAD = Math.PI / 180,
@@ -212,10 +214,14 @@ _comma = ",",
   _copyElement.style.display = "none";
 },
     _coreInitted,
-    _initCore = function _initCore() {
+    _initCore = function _initCore(core) {
   _doc = document;
   _win = window;
   _body = _doc.body;
+  gsap = gsap || core || _win.gsap || console.warn("Please gsap.registerPlugin(PathEditor)");
+
+  _context = gsap && gsap.core.context || function () {};
+
   _tempDiv = _createElement("div");
   _copyElement = _createElement("textarea");
   _copyElement.style.display = "none";
@@ -337,7 +343,7 @@ _comma = ",",
   _addListener(_win, "touchmove", _emptyFunc); //works around Safari bugs that still allow the page to scroll even when we preventDefault() on the touchmove event.
 
 
-  _body && _body.addEventListener("touchstart", _emptyFunc); //works around Safari bug: https://greensock.com/forums/topic/21450-draggable-in-iframe-on-mobile-is-buggy/
+  _body && _body.addEventListener("touchstart", _emptyFunc); //works around Safari bug: https://gsap.com/forums/topic/21450-draggable-in-iframe-on-mobile-is-buggy/
 
   _coreInitted = 1;
 },
@@ -768,11 +774,7 @@ var Anchor = /*#__PURE__*/function () {
 export var PathEditor = /*#__PURE__*/function () {
   function PathEditor(target, vars) {
     vars = vars || {};
-
-    if (!_coreInitted) {
-      _initCore();
-    }
-
+    _coreInitted || _initCore();
     this.vars = vars;
     this.path = typeof target === "string" ? _doc.querySelectorAll(target)[0] : target;
     this._g = _createSVG("g", this.path.ownerSVGElement, {
@@ -878,6 +880,8 @@ export var PathEditor = /*#__PURE__*/function () {
     _addListener(this._selectionHittest, "touchstart", _bind(this._onClickSelectionPath, this));
 
     _addListener(this._selectionHittest, "touchend", _bind(this._onRelease, this));
+
+    _context(this);
   }
 
   var _proto3 = PathEditor.prototype;
@@ -1073,7 +1077,7 @@ export var PathEditor = /*#__PURE__*/function () {
   };
 
   _proto3.isSelected = function isSelected() {
-    return this._selectedAnchors.length > 0;
+    return this._selectedAnchors.length > 0 || this._selection.style.visibility === "visible";
   };
 
   _proto3.select = function select(allAnchors) {
@@ -1506,8 +1510,8 @@ export var PathEditor = /*#__PURE__*/function () {
 
     if (!_enabled2) {
       this.deselect();
-      this.path.ownerSVGElement.removeChild(this._selectionHittest);
-      this.path.ownerSVGElement.removeChild(this._selection);
+      this._selectionHittest.parentNode && this._selectionHittest.parentNode.removeChild(this._selectionHittest);
+      this._selection.parentNode && this._selection.parentNode.removeChild(this._selection);
     } else if (!this._selection.parentNode) {
       this.path.ownerSVGElement.appendChild(this._selectionHittest);
       this.path.ownerSVGElement.appendChild(this._selection);
@@ -1671,6 +1675,15 @@ export var PathEditor = /*#__PURE__*/function () {
     return "M" + _temp.join(",");
   };
 
+  _proto3.kill = function kill() {
+    this.enabled(false);
+    this._g.parentNode && this._g.parentNode.removeChild(this._g);
+  };
+
+  _proto3.revert = function revert() {
+    this.kill();
+  };
+
   return PathEditor;
 }();
 PathEditor.simplifyPoints = simplifyPoints;
@@ -1801,5 +1814,6 @@ PathEditor.getSnapFunction = function (vars) {
   };
 };
 
-PathEditor.version = "3.9.1";
+PathEditor.version = "3.12.4";
+PathEditor.register = _initCore;
 export { PathEditor as default };

@@ -12,6 +12,9 @@ export default function Home() {
         <li className={styles.card}>
           <a href="/multiline-underline">multi line hover</a>
         </li>
+        <li className={styles.card}>
+          <a href="/animated-text">animated text</a>
+        </li>
       </ul>
     </main>
   );

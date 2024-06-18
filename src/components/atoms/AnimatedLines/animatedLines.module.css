@@ -12,7 +12,7 @@
     z-index: 1;
     background-color: black;
     transform-origin: left;
-    transform: scaleX(var(--line-scale));
+    transform: scaleX(var(--line-scale, 0));
   }
   &:global(.reference-lines) {
     position: relative;

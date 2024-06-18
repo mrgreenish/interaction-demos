@@ -1,10 +1,10 @@
 /*!
- * SplitText: 3.9.1
- * https://greensock.com
+ * SplitText: 3.12.4
+ * https://gsap.com
  *
- * @license Copyright 2008-2021, GreenSock. All rights reserved.
- * Subject to the terms at https://greensock.com/standard-license or for
- * Club GreenSock members, the agreement issued with that membership.
+ * @license Copyright 2008-2023, GreenSock. All rights reserved.
+ * Subject to the terms at https://gsap.com/standard-license or for
+ * Club GSAP members, the agreement issued with that membership.
  * @author: Jack Doyle, jack@greensock.com
 */
 
@@ -14,25 +14,30 @@ import { emojiExp, getText } from "./utils/strings.js";
 var _doc,
     _win,
     _coreInitted,
+    gsap,
+    _context,
+    _toArray,
     _stripExp = /(?:\r|\n|\t\t)/g,
     //find carriage returns, new line feeds and double-tabs.
 _multipleSpacesExp = /(?:\s\s+)/g,
-    _initCore = function _initCore() {
+    _nonBreakingSpace = String.fromCharCode(160),
+    _initCore = function _initCore(core) {
   _doc = document;
   _win = window;
-  _coreInitted = 1;
+  gsap = gsap || core || _win.gsap || console.warn("Please gsap.registerPlugin(SplitText)");
+
+  if (gsap) {
+    _toArray = gsap.utils.toArray;
+
+    _context = gsap.core.context || function () {};
+
+    _coreInitted = 1;
+  }
 },
     _bonusValidated = 1,
     //<name>SplitText</name>
 _getComputedStyle = function _getComputedStyle(element) {
   return _win.getComputedStyle(element);
-},
-    _isArray = Array.isArray,
-    _slice = [].slice,
-    _toArray = function _toArray(value, leaveStrings) {
-  //takes any value and returns an array. If it's a string (and leaveStrings isn't true), it'll use document.querySelectorAll() and convert that to an array. It'll also accept iterables like jQuery objects.
-  var type;
-  return _isArray(value) ? value : (type = typeof value) === "string" && !leaveStrings && value ? _slice.call(_doc.querySelectorAll(value), 0) : value && type === "object" && "length" in value ? _slice.call(value, 0) : value ? [value] : [];
 },
     _isAbsolute = function _isAbsolute(vars) {
   return vars.position === "absolute" || vars.absolute === true;
@@ -415,6 +420,9 @@ _findSpecialChars = function _findSpecialChars(text, chars) {
   chars = ~types.indexOf("chars"),
       absolute = _isAbsolute(vars),
       wordDelimiter = vars.wordDelimiter || " ",
+      isWordDelimiter = function isWordDelimiter(_char) {
+    return _char === wordDelimiter || _char === _nonBreakingSpace && wordDelimiter === " ";
+  },
       space = wordDelimiter !== " " ? "" : absolute ? "&#173; " : " ",
       wordEnd = "</" + tag + ">",
       wordIsOpen = 1,
@@ -457,11 +465,11 @@ _findSpecialChars = function _findSpecialChars(text, chars) {
       character = text.substr(i, testResult || 1);
       splitText += chars && character !== " " ? charStart() + character + "</" + tag + ">" : character;
       i += testResult - 1;
-    } else if (character === wordDelimiter && text.charAt(i - 1) !== wordDelimiter && i) {
+    } else if (isWordDelimiter(character) && !isWordDelimiter(text.charAt(i - 1)) && i) {
       splitText += wordIsOpen ? wordEnd : "";
       wordIsOpen = 0;
 
-      while (text.charAt(i + 1) === wordDelimiter) {
+      while (isWordDelimiter(text.charAt(i + 1))) {
         //skip over empty spaces (to avoid making them words)
         splitText += space;
         i++;
@@ -534,6 +542,9 @@ export var SplitText = /*#__PURE__*/function () {
     this.lines = [];
     this._originals = [];
     this.vars = vars || {};
+
+    _context(this);
+
     _bonusValidated && this.split(vars);
   }
 
@@ -555,7 +566,10 @@ export var SplitText = /*#__PURE__*/function () {
 
     while (--i > -1) {
       e = this.elements[i];
-      this._originals[i] = e.innerHTML;
+      this._originals[i] = {
+        html: e.innerHTML,
+        style: e.getAttribute("style")
+      };
       origHeight = e.clientHeight;
       origWidth = e.clientWidth;
 
@@ -579,7 +593,8 @@ export var SplitText = /*#__PURE__*/function () {
     }
 
     this.elements.forEach(function (e, i) {
-      return e.innerHTML = originals[i];
+      e.innerHTML = originals[i].html;
+      e.setAttribute("style", originals[i].style);
     });
     this.chars = [];
     this.words = [];
@@ -594,5 +609,6 @@ export var SplitText = /*#__PURE__*/function () {
 
   return SplitText;
 }();
-SplitText.version = "3.9.1";
+SplitText.version = "3.12.4";
+SplitText.register = _initCore;
 export { SplitText as default };

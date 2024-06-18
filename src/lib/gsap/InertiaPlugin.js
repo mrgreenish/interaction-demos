@@ -1,10 +1,10 @@
 /*!
- * InertiaPlugin 3.9.1
- * https://greensock.com
+ * InertiaPlugin 3.12.4
+ * https://gsap.com
  *
- * @license Copyright 2008-2021, GreenSock. All rights reserved.
- * Subject to the terms at https://greensock.com/standard-license or for
- * Club GreenSock members, the agreement issued with that membership.
+ * @license Copyright 2008-2023, GreenSock. All rights reserved.
+ * Subject to the terms at https://gsap.com/standard-license or for
+ * Club GSAP members, the agreement issued with that membership.
  * @author: Jack Doyle, jack@greensock.com
 */
 
@@ -23,6 +23,8 @@ var gsap,
     _checkPointRatio,
     _clamp,
     _processingVars,
+    _getStyleSaver,
+    _reverting,
     _getTracker = VelocityTracker.getByTarget,
     _getGSAP = function _getGSAP() {
   return gsap || typeof window !== "undefined" && (gsap = window.gsap) && gsap.registerPlugin && gsap;
@@ -327,6 +329,10 @@ _isArray = Array.isArray,
     _getUnit = gsap.utils.getUnit;
     _getCache = gsap.core.getCache;
     _clamp = gsap.utils.clamp;
+    _getStyleSaver = gsap.core.getStyleSaver;
+
+    _reverting = gsap.core.reverting || function () {};
+
     _power3 = _parseEase("power3");
     _checkPointRatio = _power3(0.05);
     PropTween = gsap.core.PropTween;
@@ -346,7 +352,7 @@ _isArray = Array.isArray,
 };
 
 export var InertiaPlugin = {
-  version: "3.9.1",
+  version: "3.12.4",
   name: "inertia",
   register: function register(core) {
     gsap = core;
@@ -367,6 +373,7 @@ export var InertiaPlugin = {
       vars = tracker.getAll();
     }
 
+    this.styles = _getStyleSaver && typeof target.style === "object" && _getStyleSaver(target);
     this.target = target;
     this.tween = tween;
     _processingVars = vars; // gets swapped inside _calculateTweenDuration() if there's a function-based value encountered (to avoid double-calling it)
@@ -440,6 +447,7 @@ export var InertiaPlugin = {
 
         this._props.push(p);
 
+        this.styles && this.styles.save(p);
         this._pt = new PropTween(this._pt, target, p, curVal, 0, _emptyFunc, 0, cache.set(target, p, this));
         this._pt.u = unit || 0;
         this._pt.c1 = change1;
@@ -454,9 +462,13 @@ export var InertiaPlugin = {
     var pt = data._pt;
     ratio = _power3(data.tween._time / data.tween._dur);
 
-    while (pt) {
-      pt.set(pt.t, pt.p, _round(pt.s + pt.c1 * ratio + pt.c2 * ratio * ratio) + pt.u, pt.d, ratio);
-      pt = pt._next;
+    if (ratio || !_reverting()) {
+      while (pt) {
+        pt.set(pt.t, pt.p, _round(pt.s + pt.c1 * ratio + pt.c2 * ratio * ratio) + pt.u, pt.d, ratio);
+        pt = pt._next;
+      }
+    } else {
+      data.styles.revert();
     }
   }
 };

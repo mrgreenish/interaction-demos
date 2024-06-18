@@ -1,10 +1,10 @@
 /*!
- * MorphSVGPlugin 3.9.1
- * https://greensock.com
+ * MorphSVGPlugin 3.12.4
+ * https://gsap.com
  *
- * @license Copyright 2008-2021, GreenSock. All rights reserved.
- * Subject to the terms at https://greensock.com/standard-license or for
- * Club GreenSock members, the agreement issued with that membership.
+ * @license Copyright 2008-2023, GreenSock. All rights reserved.
+ * Subject to the terms at https://gsap.com/standard-license or for
+ * Club GSAP members, the agreement issued with that membership.
  * @author: Jack Doyle, jack@greensock.com
 */
 
@@ -750,7 +750,7 @@ _populateSmoothData = function _populateSmoothData(rawPath, tolerance) {
 };
 
 export var MorphSVGPlugin = {
-  version: "3.9.1",
+  version: "3.12.4",
   name: "morphSVG",
   rawVars: 1,
   // otherwise "render" would be interpreted as a function-based value.
@@ -914,8 +914,8 @@ export var MorphSVGPlugin = {
                   this._tweenRotation(startSeg, endSeg, i);
                 }
               } else {
-                pt = this.add(startSeg, i, startSeg[i], endSeg[i]);
-                pt = this.add(startSeg, i + 1, startSeg[i + 1], endSeg[i + 1]) || pt;
+                pt = this.add(startSeg, i, startSeg[i], endSeg[i], 0, 0, 0, 0, 0, 1);
+                pt = this.add(startSeg, i + 1, startSeg[i + 1], endSeg[i + 1], 0, 0, 0, 0, 0, 1) || pt;
               }
             }
           }
@@ -925,8 +925,8 @@ export var MorphSVGPlugin = {
       }
 
       if (useRotation) {
-        this.add(this._origin, "x", this._origin.x, this._eOrigin.x);
-        pt = this.add(this._origin, "y", this._origin.y, this._eOrigin.y);
+        this.add(this._origin, "x", this._origin.x, this._eOrigin.x, 0, 0, 0, 0, 0, 1);
+        pt = this.add(this._origin, "y", this._origin.y, this._eOrigin.y, 0, 0, 0, 0, 0, 1);
       }
 
       if (pt) {

@@ -15,6 +15,7 @@ interface Props {
   className?: string
   classLines?: string
 }
+gsap.registerPlugin(SplitText);
 
 export default function AnimatedLines (props: Props): JSX.Element {
   const { children, mouseHandler, className, classLines } = props

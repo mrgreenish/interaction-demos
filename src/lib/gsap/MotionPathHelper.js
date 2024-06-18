@@ -1,10 +1,10 @@
 /*!
- * MotionPathHelper 3.9.1
- * https://greensock.com
+ * MotionPathHelper 3.12.4
+ * https://gsap.com
  *
- * @license Copyright 2008-2021, GreenSock. All rights reserved.
- * Subject to the terms at https://greensock.com/standard-license or for
- * Club GreenSock members, the agreement issued with that membership.
+ * @license Copyright 2008-2023, GreenSock. All rights reserved.
+ * Subject to the terms at https://gsap.com/standard-license or for
+ * Club GSAP members, the agreement issued with that membership.
  * @author: Jack Doyle, jack@greensock.com
 */
 
@@ -19,6 +19,7 @@ var gsap,
     MotionPathPlugin,
     _arrayToRawPath,
     _rawPathToString,
+    _context,
     _bonusValidated = 1,
     //<name>MotionPathHelper</name>
 _selectorExp = /(^[#\.][a-z]|[a-y][a-z])/i,
@@ -28,7 +29,7 @@ _selectorExp = /(^[#\.][a-z]|[a-y][a-z])/i,
     _createElement = function _createElement(type, ns) {
   var e = _doc.createElementNS ? _doc.createElementNS((ns || "http://www.w3.org/1999/xhtml").replace(/^https/, "http"), type) : _doc.createElement(type); //some servers swap in https for http in the namespace which can break things, making "style" inaccessible.
 
-  return e.style ? e : _doc.createElement(type); //some environments won't allow access to the element's style when created with a namespace in which case we default to the standard createElement() to work around the issue. Also note that when GSAP is embedded directly inside an SVG file, createElement() won't allow access to the style object in Firefox (see https://greensock.com/forums/topic/20215-problem-using-tweenmax-in-standalone-self-containing-svg-file-err-cannot-set-property-csstext-of-undefined/).
+  return e.style ? e : _doc.createElement(type); //some environments won't allow access to the element's style when created with a namespace in which case we default to the standard createElement() to work around the issue. Also note that when GSAP is embedded directly inside an SVG file, createElement() won't allow access to the style object in Firefox (see https://gsap.com/forums/topic/20215-problem-using-tweenmax-in-standalone-self-containing-svg-file-err-cannot-set-property-csstext-of-undefined/).
 },
     _getPositionOnPage = function _getPositionOnPage(target) {
   var bounds = target.getBoundingClientRect(),
@@ -82,6 +83,7 @@ _selectorExp = /(^[#\.][a-z]|[a-y][a-z])/i,
       _copyElement.value = c;
 
       if (c && _copyElement.select) {
+        console.log(c);
         _copyElement.style.display = "block";
 
         _copyElement.select();
@@ -130,10 +132,17 @@ _selectorExp = /(^[#\.][a-z]|[a-y][a-z])/i,
   var message = "Please gsap.registerPlugin(MotionPathPlugin)";
   _win = window;
   gsap = gsap || core || _win.gsap || console.warn(message);
+  gsap && PathEditor.register(gsap);
   _doc = document;
   _body = _doc.body;
   _docEl = _doc.documentElement;
-  MotionPathPlugin = gsap && gsap.plugins.motionPath;
+
+  if (gsap) {
+    MotionPathPlugin = gsap.plugins.motionPath;
+    MotionPathHelper.PathEditor = PathEditor;
+
+    _context = gsap.core.context || function () {};
+  }
 
   if (!MotionPathPlugin) {
     required === true && console.warn(message);
@@ -147,6 +156,8 @@ _selectorExp = /(^[#\.][a-z]|[a-y][a-z])/i,
 
 export var MotionPathHelper = /*#__PURE__*/function () {
   function MotionPathHelper(targetOrTween, vars) {
+    var _this = this;
+
     if (vars === void 0) {
       vars = {};
     }
@@ -173,7 +184,8 @@ export var MotionPathHelper = /*#__PURE__*/function () {
         temp,
         matrix,
         refreshPath,
-        animationToScrub;
+        animationToScrub,
+        createdSVG;
 
     if (targetOrTween instanceof gsap.core.Tween) {
       animation = targetOrTween;
@@ -227,6 +239,7 @@ export var MotionPathHelper = /*#__PURE__*/function () {
         offset.y = temp.y;
       } else {
         svg = _createElement("svg", svgNamespace);
+        createdSVG = true;
 
         _body.appendChild(svg);
 
@@ -241,13 +254,23 @@ export var MotionPathHelper = /*#__PURE__*/function () {
       path.setAttribute("vector-effect", "non-scaling-stroke");
       path.style.cssText = "fill:transparent; stroke-width:" + (vars.pathWidth || 3) + "; stroke:" + (vars.pathColor || "#555") + "; opacity:" + (vars.pathOpacity || 0.6);
       svg.appendChild(path);
+    } else {
+      vars.pathColor && gsap.set(path, {
+        stroke: vars.pathColor
+      });
+      vars.pathWidth && gsap.set(path, {
+        strokeWidth: vars.pathWidth
+      });
+      vars.pathOpacity && gsap.set(path, {
+        opacity: vars.pathOpacity
+      });
+    }
 
-      if (offset.x || offset.y) {
-        gsap.set(path, {
-          x: offset.x,
-          y: offset.y
-        });
-      }
+    if (offset.x || offset.y) {
+      gsap.set(path, {
+        x: offset.x,
+        y: offset.y
+      });
     }
 
     if (!("selected" in vars)) {
@@ -262,7 +285,7 @@ export var MotionPathHelper = /*#__PURE__*/function () {
       };
     }
 
-    animationToScrub = animation && animation.parent.data === "nested" ? animation.parent.parent : animation;
+    animationToScrub = animation && animation.parent && animation.parent.data === "nested" ? animation.parent.parent : animation;
 
     vars.onPress = function () {
       animationToScrub.pause(0);
@@ -320,6 +343,16 @@ export var MotionPathHelper = /*#__PURE__*/function () {
     }
 
     this.animation = animation;
+
+    _context(this);
+
+    this.kill = this.revert = function () {
+      _this.editor.kill();
+
+      copyButton.parentNode && copyButton.parentNode.removeChild(copyButton);
+      createdSVG && svg.parentNode && svg.parentNode.removeChild(svg);
+      animationToScrub && animationToScrub.revert();
+    };
   }
 
   var _proto = MotionPathHelper.prototype;
@@ -340,5 +373,5 @@ MotionPathHelper.editPath = function (path, vars) {
   return PathEditor.create(path, vars);
 };
 
-MotionPathHelper.version = "3.9.1";
+MotionPathHelper.version = "3.12.4";
 export { MotionPathHelper as default };
