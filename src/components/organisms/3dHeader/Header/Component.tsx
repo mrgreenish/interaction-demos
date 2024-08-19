@@ -1,10 +1,12 @@
+'use client';
+
 import React, { useRef, useEffect, MouseEvent, useState } from "react";
 import * as THREE from "three";
 import { useInView } from "react-hook-inview";
 import gsap from "gsap";
 import { Canvas } from "@react-three/fiber";
 import { ContactShadows } from "@react-three/drei";
-import Circle from "../Circle";
+import Circle from "@components/atoms/3dHeader/Circle/Component";
 
 import s from "./styles.module.css";
 

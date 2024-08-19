@@ -1,11 +1,8 @@
-import React from 'react'
+import Head from "next/head";
+import Timeline from "@components/organisms/Timeline/Component";
+import styles from './page.module.css'
 
-import Timeline, { timelineItem } from './Component';
-
-export default {
-  title: 'Organisms/Timeline',
-  component: Timeline,
-  args: {
+const timelinedata = {
     items: [
       {
         id: '1',
@@ -54,19 +51,23 @@ export default {
         body: '<p><b>Demontage der Oberleitung</b><br /><br />Nunc dictumst amet diam, massa erat ac. Non vel <a href=\'#\'>turpis accumsan</a> magnis sed. Vulputate eu, hendrerit fringilla rutrum non eget purus convallis. Lobortis venenatis, ornare non elit. Posuere porta sapien, Lobortis venenatis, ornare non elit. Posuere porta sapien, Lobortis venenatis, ornare non elit. Posuere porta sapien, Lobortis venenatis, ornare non elit. <br/> <br/> Posuere porta sapien, <a data-reference="on" title="Erfahren Sie alles über" data-href="http://www.tesla.com" data-description="Stickstoff mit (importiertem) hochkalorischem Gas" href="#crosslink-other">cross referance item</a> Consequat vitae felis elementum, magna vitae eros amet. Erat non ac odio quis <a data-reference="on" title="Lesen Sie auch" data-href="http://www.google.com" data-description="Verbrauchs an niederkalorischem Gas im Jahr 2017" href="#crosslink-operations">operations</a> varius morbi elementum. Mattis convallis odio mattis in morbi purus eu. In pharetra quam non ridiculus. <a data-reference="on" title="Lesen Sie auch" data-href="/raport" data-description="Verbrauchs raport" href="#crosslink-raport">Raport</a>. Mattis convallis odio mattis in morbi purus eu. In pharetra quam non ridiculus.</p>',
       }
     ]
-  },
 }
 
-const Template = (args: { items: timelineItem[] }) => (
-  <>
-    <div className="px-5 mb-5">
-      <h1 className="mb-50">Timeline</h1>
-    </div>
-    <div className=''>
-      <Timeline title="Projekt Zeitplan" items={args.items} />
-    </div>
-    <div className="h-[200vh] bg-brand-blue-100">content</div>
-  </>
-)
-
-export const Default = Template.bind({})
+export default function Home() {
+  return (
+    <>
+      <Head>
+        <title>iO digital</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </Head>
+      <main>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+        <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        <Timeline title="Timeline demo" items={timelinedata} />
+;<div className='h-[200vh] bg-brand-blue-100'>content</div>
+      </main>
+    </>
+  );
+}

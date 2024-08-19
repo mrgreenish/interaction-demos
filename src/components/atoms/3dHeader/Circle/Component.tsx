@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useRef, useState, useEffect, Suspense } from "react";
 import * as THREE from "three";
 import { useMediaQuery } from "@react-hookz/web";

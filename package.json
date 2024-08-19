@@ -10,14 +10,19 @@
   },
   "dependencies": {
     "@gsap/react": "^2.1.1",
+    "@react-hookz/web": "^24.0.4",
+    "@react-three/drei": "^9.88.4",
+    "@react-three/fiber": "^8.14.6",
     "bowser": "^2.11.0",
     "clsx": "^2.1.1",
     "gsap": "^3.12.5",
     "next": "14.2.4",
     "react": "^18",
     "react-dom": "^18",
+    "react-hook-inview": "^4.5.1",
     "react-use": "^17.5.1",
-    "zustand": "^4.5.5"
+    "zustand": "^4.5.5",
+    "three": "^0.149.0"
   },
   "devDependencies": {
     "@types/node": "^20",
