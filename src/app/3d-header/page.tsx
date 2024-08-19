@@ -1,16 +1,15 @@
-import Head from "next/head";
+import Navigation from "@/components/atoms/Navigation/Component";
 import Header from "@components/organisms/3dHeader/Header/Component";
 import styles from './page.module.css'
+import globalStyles from '../page.module.css'
+
 
 
 export default function Home() {
   return (
-    <>
-      <Head>
-        <title>iO digital</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </Head>
-      <main>
+
+    <main className={globalStyles.main}>
+        <Navigation description="3d header using react three fiber and GSAP" />
         <Header />
         <div className={styles.content}>
           <h1>iO</h1>
@@ -18,6 +17,5 @@ export default function Home() {
           <h2>Onze expertise & skills</h2>
         </div>
       </main>
-    </>
   );
 }

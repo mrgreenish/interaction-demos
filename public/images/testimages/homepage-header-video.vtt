@@ -1,0 +1,15 @@
+WEBVTT
+
+0
+00:00:00.000 --> 00:00:12.000
+[Test]
+
+NOTE This is a comment and must be preceded by a blank line
+
+1
+00:00:18.700 --> 00:00:21.500
+Some more caption text
+
+2
+00:00:22.800 --> 00:00:26.800
+And even more caption text!

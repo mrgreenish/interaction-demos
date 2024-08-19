@@ -6,6 +6,7 @@ import Image from 'next/image'
 import Paragraph from '@components/organisms/Timeline/Paragraph/Component'
 import useTimeline from './useTimeline'
 import { hasValue } from '@misc/helpers'
+
 import clsx from 'clsx'
 
 export interface timelineItem {
@@ -82,12 +83,12 @@ export default function TimelineComponent ({ title, items }: Props): JSX.Element
                       <Paragraph html={item.body} />
                       <div>
                         <div className='progress-bar absolute top-0 lg:top-2 left-1 w-[1px] h-[calc(100%-0em)] lg:h-full bg-grey-100 -z-0' />
-                        <div className={clsx('red', 'progress-bar absolute top-0 lg:top-2 left-1 ml-[-1px] w-[3px] h-[calc(100%-0em)] lg:h-full -z-1 origin-top js-progress')} />
+                        <div className={clsx('bg-sky-100', 'progress-bar absolute top-0 lg:top-2 left-1 ml-[-1px] w-[3px] h-[calc(100%-0em)] lg:h-full -z-1 origin-top js-progress')} />
                         <div className='absolute left-0 flex items-center justify-center w-2 h-2 border rounded-full top-5 lg:top-2 border-grey-100 bg-eggshell-100'>
                           <div className='w-1 h-1 rounded-full bg-grey-100' />
                         </div>
                         <div className='absolute left-0 flex items-center justify-center w-2 h-2 border rounded-full top-5 lg:top-2 border-grey-100 bg-eggshell-100'>
-                          <div className={clsx('red', 'w-1 h-1 rounded-full js-end-circle')} />
+                          <div className={clsx('bg-sky-100', 'w-1 h-1 rounded-full js-end-circle')} />
                         </div>
                       </div>
                     </div>

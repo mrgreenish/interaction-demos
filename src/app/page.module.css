@@ -78,6 +78,7 @@
   height: 100vh;
   position: relative;
   background-color: lightblue;
+  padding: 2rem;
 }
 
 
@@ -235,4 +236,10 @@
   to {
     transform: rotate(0deg);
   }
+}
+
+
+.nav {
+  margin-top: 5rem;
+  margin-bottom: 5rem;
 }

@@ -2,10 +2,8 @@ import React, { useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
 import Image from 'next/image'
 import { hasValue } from '@misc/helpers'
-import { FormattedText } from '@components/molecules/FormattedText/Component'
-import CrossLink, {
-  crossLink
-} from '@components/molecules/CrossLink/Component'
+import { FormattedText } from '@components/organisms/Timeline/FormattedText/Component'
+
 import classNames from 'classnames'
 
 interface ParagraphProps {
@@ -127,7 +125,6 @@ export default function Paragraph (props: ParagraphProps): JSX.Element {
         </div>
       )}
 
-      {hasValue(crossLinksData) && <CrossLink crossLinks={crossLinksData} />}
     </div>
   )
 }
