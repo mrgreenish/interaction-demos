@@ -18,6 +18,9 @@ export default function Home() {
         <li className={styles.card}>
           <a href="/mouse-follow">mouse follow</a>
         </li>
+        <li className={styles.card}>
+          <a href="/custom-cursor">Custom cursor with multiple animation types<i>(width Zustand implementation)</i></a>
+        </li>
       </ul>
     </main>
   );

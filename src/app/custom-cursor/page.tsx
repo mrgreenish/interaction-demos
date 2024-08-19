@@ -1,12 +1,11 @@
 import Head from "next/head";
-import Cursor from "../components/Cursor/Component";
-import { useCursorStore } from '../stores/cursor'
-import CursorSetter from '../components/CursorSetter/Component'
-import styles from "../styles/Home.module.css";
+import Cursor from "@components/molecules/CustomCursor/Cursor/Component";
+import { CurrentCursorDisplay } from "@components/molecules/CustomCursor/CurrentCursorDisplay/Component";
+import CursorSetter from '@components/molecules/CustomCursor/CursorSetter/Component'
+import styles from './page.module.css';
 
 export default function Home() {
-  const currentCursor = useCursorStore((state) => state.currentCursor);
-  const setCursor = useCursorStore((state) => state.setCursor);
+
   return (
     <>
       <Head>
@@ -18,7 +17,8 @@ export default function Home() {
       <main className={styles.main}>
         <Cursor />
         <div className={styles.content}>
-          <h1>{currentCursor}</h1>
+          {/* <h1>{currentCursor}</h1> */}
+          <CurrentCursorDisplay/>
           <div className={styles.grid}>
           <CursorSetter cursor="shrink">
             <div className={styles.box}></div>
