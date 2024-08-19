@@ -1,0 +1,66 @@
+.wrapper {
+  block-size: 100%;
+  margin-inline-start: calc(-50vw + 50%);
+  margin-inline-end: calc(-50vw + 50%);
+  position: absolute;
+  pointer-events: none;
+  inline-size: 100%;
+}
+
+.ufoWrapper {
+  align-items: center;
+  block-size: 120px;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  transform-origin: center center;
+  inline-size: 50px;
+  will-change: transform;
+  z-index: 1;
+}
+
+.ufo {
+  position: absolute;
+  transform-origin: center center;
+  will-change: transform;
+}
+
+.ufoLamps {
+  block-size: 100%;
+  position: absolute;
+  inline-size: 100%;
+}
+
+.ufoLamp {
+  background-color: #fffe66;
+  border-radius: 50%;
+  block-size: 2px;
+  position: absolute;
+  inline-size: 2px;
+  will-change: opacity;
+}
+
+.ufoLamp:nth-child(1) {
+  inset-inline-start: 15px;
+  inset-block-start: -18px;
+}
+
+.ufoLamp:nth-child(2) {
+  inset-inline-start: 23px;
+  inset-block-start: -15px;
+}
+
+.ufoLamp:nth-child(3) {
+  inset-block-start: -13px;
+  inset-inline-start: 33px;
+}
+
+.canvas {
+  inset-block-end: -90px;
+  block-size: 100px;
+  inset-inline-start: -78px;
+  position: absolute;
+  transform-origin: top center;
+  inline-size: 200px;
+  z-index: -1;
+}

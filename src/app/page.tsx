@@ -15,6 +15,9 @@ export default function Home() {
         <li className={styles.card}>
           <a href="/animated-text">animated text</a>
         </li>
+        <li className={styles.card}>
+          <a href="/mouse-follow">mouse follow</a>
+        </li>
       </ul>
     </main>
   );

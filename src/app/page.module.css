@@ -73,6 +73,14 @@
   text-wrap: balance;
 }
 
+.largeBlock {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  background-color: lightblue;
+}
+
+
 .center {
   display: flex;
   justify-content: center;

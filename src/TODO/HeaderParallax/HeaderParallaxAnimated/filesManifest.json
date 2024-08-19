@@ -1,0 +1,273 @@
+{
+  "files": [
+    {
+      "id": "bg",
+      "file": "01_BG.webp",
+      "standalone": true,
+      "fill": false,
+      "sizes": {
+        "Desktop": {
+          "width": 1740,
+          "height": 960
+        },
+        "Mobile": {
+          "width": 525,
+          "height": 812
+        },
+        "Desktop-XL": {
+          "width": 3146,
+          "height": 2476
+        }
+      }
+    },
+    {
+      "id": "pagode",
+      "file": "03_Pagode.webp",
+      "depth": 0.18,
+      "sizes": {
+        "Desktop-XL": {
+          "width": 3146,
+          "height": 1147
+        },
+        "Desktop": {
+          "width": 1740,
+          "height": 668
+        },
+        "Mobile": {
+          "width": 1050,
+          "height": 786
+        }
+      }
+    },
+    {
+      "id": "moon",
+      "standalone": true,
+      "file": "13_Moon.webp",
+      "depth": 0.01,
+      "sizes": {
+        "Desktop": {
+          "width": 54,
+          "height": 65
+        },
+        "Mobile": {
+          "width": 54,
+          "height": 65
+        },
+        "Desktop-XL": {
+          "width": 54,
+          "height": 65
+        }
+      }
+    },
+    {
+      "id": "bomen",
+      "file": "02_Bomen.webp",
+      "depth": 0.3,
+      "sizes": {
+        "Desktop-XL": {
+          "width": 3146,
+          "height": 1147
+        },
+        "Desktop": {
+          "width": 1740,
+          "height": 668
+        },
+        "Mobile": {
+          "width": 1050,
+          "height": 786
+        }
+      }
+    },
+    {
+      "id": "hotel",
+      "file": "06_Hotel.webp",
+      "depth": 0.5,
+      "sizes": {
+        "Desktop-XL": {
+          "width": 3146,
+          "height": 1147
+        },
+        "Desktop": {
+          "width": 1740,
+          "height": 668
+        },
+        "Mobile": {
+          "width": 1050,
+          "height": 786
+        }
+      }
+    },
+    {
+      "id": "ramen",
+      "file": "07_Ramen.webp",
+      "depth": 0.5,
+      "sizes": {
+        "Desktop-XL": {
+          "width": 3146,
+          "height": 1147
+        },
+        "Desktop": {
+          "width": 1740,
+          "height": 668
+        },
+        "Mobile": {
+          "width": 1050,
+          "height": 786
+        }
+      }
+    },
+    {
+      "id": "glow",
+      "file": "08_Glow.webp",
+      "depth": 0.5,
+      "sizes": {
+        "Desktop-XL": {
+          "width": 3146,
+          "height": 1147
+        },
+        "Desktop": {
+          "width": 1740,
+          "height": 668
+        },
+        "Mobile": {
+          "width": 1050,
+          "height": 786
+        }
+      }
+    },
+    {
+      "id": "bomenRight",
+      "file": "10_Bomen_right.webp",
+      "depth": 1.2,
+      "standalone": true,
+      "mobileDepth": 0.5,
+      "sizes": {
+        "Desktop": {
+          "width": 990,
+          "height": 1348
+        },
+        "Mobile": {
+          "width": 164,
+          "height": 337
+        },
+        "Desktop-XL": {
+          "width": 1573,
+          "height": 2117
+        }
+      }
+    },
+    {
+      "id": "bomenLeft",
+      "file": "10_Bomen_left.webp",
+      "depth": 1.2,
+      "standalone": true,
+      "mobileDepth": 0.5,
+      "sizes": {
+        "Desktop": {
+          "width": 740,
+          "height": 1549
+        },
+        "Mobile": {
+          "width": 233,
+          "height": 459
+        },
+        "Desktop-XL": {
+          "width": 1347,
+          "height": 2439
+        }
+      }
+    },
+    {
+      "id": "bosjes",
+      "standalone": true,
+      "file": "12_Bosjes.webp",
+      "depth": 1,
+      "sizes": {
+        "Mobile": {
+          "width": 1050,
+          "height": 620
+        }
+      }
+    },
+    {
+      "id": "mist01",
+      "standalone": true,
+      "file": "11_Mist_01.webp",
+      "depth": 2.5,
+      "sizes": {
+        "Desktop": {
+          "width": 676,
+          "height": 142
+        },
+        "Mobile": {
+          "width": 676,
+          "height": 142
+        },
+        "Desktop-XL": {
+          "width": 1108,
+          "height": 233
+        }
+      }
+    },
+    {
+      "id": "mist02",
+      "standalone": true,
+      "file": "11_Mist_02.webp",
+      "depth": 2.5,
+      "sizes": {
+        "Desktop": {
+          "width": 694,
+          "height": 155
+        },
+        "Mobile": {
+          "width": 694,
+          "height": 155
+        },
+        "Desktop-XL": {
+          "width": 1138,
+          "height": 254
+        }
+      }
+    },
+    {
+      "id": "mist03",
+      "standalone": true,
+      "file": "11_Mist_03.webp",
+      "depth": 2.5,
+      "sizes": {
+        "Desktop": {
+          "width": 506,
+          "height": 115
+        },
+        "Mobile": {
+          "width": 506,
+          "height": 115
+        },
+        "Desktop-XL": {
+          "width": 830,
+          "height": 189
+        }
+      }
+    },
+    {
+      "id": "mist04",
+      "standalone": true,
+      "file": "11_Mist_04.webp",
+      "depth": 2.5,
+      "sizes": {
+        "Desktop": {
+          "width": 598,
+          "height": 154
+        },
+        "Mobile": {
+          "width": 598,
+          "height": 154
+        },
+        "Desktop-XL": {
+          "width": 980,
+          "height": 252
+        }
+      }
+    }
+  ]
+}

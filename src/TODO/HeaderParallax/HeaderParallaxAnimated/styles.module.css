@@ -1,0 +1,260 @@
+.header {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: calc(100svh);
+  background-color: #102f35;
+  user-select: none;
+}
+
+.headerWrapper {
+  position: relative;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  width: 100%;
+  height: 100vh;
+  pointer-events: none;
+  touch-action: none;
+}
+
+.navigation {
+  position: relative;
+  z-index: 1;
+  padding-top: 2.4rem;
+}
+
+.navLogo {
+  width: 117px;
+  height: 44px;
+  padding: 0;
+  opacity: 0;
+}
+
+.backgroundImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  opacity: 0;
+  user-select: none;
+
+  @media (max-height: 900px) and (min-width: 1200px) {
+    object-position: center 60%;
+  }
+}
+
+.logo {
+  position: absolute;
+  z-index: 100;
+  top: 70px;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  text-align: center;
+
+  @media (min-width: 500px) {
+    bottom: calc(50% - 100px);
+  }
+
+  @media (min-width: 1300px) {
+    z-index: 100;
+    bottom: calc(42% + 20px);
+  }
+
+  @media (min-width: 1024px) and (max-height: 855px) {
+    bottom: calc(42% + 100px);
+  }
+
+  @media (min-width: 821px) and (max-height: 750px) {
+    top: -0;
+    bottom: auto;
+  }
+}
+
+.logoImage {
+  position: absolute;
+  top: 10%;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: 0 auto;
+  opacity: 1;
+
+  & svg {
+    width: 289px;
+
+    @media (min-width: 1024px) {
+      width: 515px;
+    }
+
+    @media (min-width: 1024px) and (max-height: 700px) {
+      width: 50vh;
+      min-width: 300px;
+    }
+  }
+}
+
+.payoff {
+  position: absolute;
+  top: calc(100svh - 14rem);
+  bottom: 0;
+  display: flex;
+  width: 100%;
+  height: 15rem;
+  justify-content: center;
+  padding-right: 2.4rem;
+  padding-left: 2.4rem;
+  color: var(--color-white-90);
+  text-align: center;
+  text-shadow: 0 1px 24px rgba(0, 0, 0, 65%);
+
+  @media (min-width: 768px) {
+    top: calc(100svh - 16rem);
+    height: 21rem;
+    font-size: 2.4rem;
+  }
+}
+
+.payoffInner {
+  display: flex;
+  max-width: 47rem;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0;
+}
+
+.payoffText {
+  margin-bottom: 3.6rem;
+  perspective: 400px;
+  text-wrap: balance;
+}
+
+.isFixed {
+  position: fixed;
+  z-index: 10;
+  bottom: 3.2rem;
+  animation: slide-from-top 0.5s ease-in-out forwards;
+}
+
+@keyframes slide-from-top {
+  0% {
+    transform: translateY(-100%);
+  }
+
+  100% {
+    transform: translateY(0%);
+  }
+}
+
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+.isHidden {
+  animation: fade-out 0.2s ease-in-out forwards;
+}
+
+.headerBackground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.isBackgroundLoaded {
+  opacity: 1;
+}
+
+.layerWrapper {
+  height: 100vh;
+
+  & img {
+    will-change: transform;
+  }
+}
+
+.bgWrapper {
+  position: absolute;
+  height: 100vh;
+}
+
+.headerLayer {
+  position: absolute;
+  top: 100vh;
+  left: 0;
+  opacity: 0;
+}
+
+.sceneLayers {
+  position: absolute;
+  top: 100vh;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+}
+
+.scene {
+  --max-width: 2200px;
+
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  overflow: hidden;
+  width: 100%;
+  max-width: var(--max-width);
+  height: 200vh;
+  margin: auto;
+
+  @media (min-width: 2200px) {
+    &::after {
+      position: absolute;
+      z-index: 10;
+      top: 0;
+      left: 0;
+      width: 60rem;
+      height: 100%;
+      background: linear-gradient(-270deg, rgba(16, 47, 53, 100%) 21%, rgba(16, 47, 53, 0%) 100%);
+      content: '';
+    }
+
+    &::before {
+      position: absolute;
+      z-index: 20;
+      top: 0;
+      right: 0;
+      width: 60rem;
+      height: 100%;
+      background: linear-gradient(270deg, rgba(16, 47, 53, 100%) 21%, rgba(16, 47, 53, 0%) 100%);
+      content: '';
+    }
+  }
+}
+
+.isFilled {
+  object-fit: cover;
+}
+
+.effectLayer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
