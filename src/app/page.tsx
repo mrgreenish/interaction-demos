@@ -31,6 +31,9 @@ export default function Home () {
         <li className={styles.card}>
           <a href='/timeline'>Timeline</a>
         </li>
+        <li className={styles.card}>
+          <a href='/scroll-triggers-basics'>Scroll triggers basics cards</a>
+        </li>
       </ul>
     </main>
   )
