@@ -31,6 +31,16 @@ interface ParagraphProps {
   }
 }
 
+interface crossLink
+{
+  id: string
+  description: string
+  link: {
+    label: string
+    href: string
+  }
+}
+
 export default function Paragraph (props: ParagraphProps): JSX.Element {
   const [crossLinksData, setCrossLinksData] =
     useState<crossLink[] | null>(null)
@@ -40,10 +50,10 @@ export default function Paragraph (props: ParagraphProps): JSX.Element {
 
   useEffect(() => {
     const referenceLinks = el('[data-reference=on]')
-    const crossLinksArr: [] = []
+    const crossLinksArr: crossLink[] = []
 
     referenceLinks.forEach((referenceLink: any) => {
-      const obj = {
+      const obj: crossLink = {
         id: referenceLink.getAttribute('href').substring(1) ?? '',
         description: referenceLink.getAttribute('title') ?? '',
         link: {

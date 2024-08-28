@@ -55,7 +55,7 @@ export default function AnimatedLines (props: Props): JSX.Element {
       if (hasValue(tl.current)) tl.current.kill()
       if (hasValue(st.current)) st.current = null
     }
-  }, [splittext, timeline])
+  }, [])
 
   useEffect(() => {
     if (hasValue(st.current)) {
