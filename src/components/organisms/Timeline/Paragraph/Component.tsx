@@ -40,10 +40,10 @@ export default function Paragraph (props: ParagraphProps): JSX.Element {
 
   useEffect(() => {
     const referenceLinks = el('[data-reference=on]')
-    const crossLinksArr: crossLink[] = []
+    const crossLinksArr: [] = []
 
     referenceLinks.forEach((referenceLink: any) => {
-      const obj: crossLink = {
+      const obj = {
         id: referenceLink.getAttribute('href').substring(1) ?? '',
         description: referenceLink.getAttribute('title') ?? '',
         link: {
