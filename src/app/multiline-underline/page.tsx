@@ -2,10 +2,12 @@
 import { useState } from 'react'
 import AnimatedLines from '@components/atoms/AnimatedLines/Component'
 import Navigation from '@/components/atoms/Navigation/Component'
+import { ReadmePanel } from '@/components/organisms/ReadmePanel/Component'
 import styles from '../page.module.css'
 import pageStyles from './page.module.css'
 
-export default function Home () {
+
+export default function Home() {
   const [animateText, setAnimateText] = useState<
     'play' | 'reverse' | undefined
   >()
@@ -30,6 +32,7 @@ export default function Home () {
           </a>
         </AnimatedLines>
       </div>
+      <ReadmePanel title="Hover with multiline underline with stagger" description='Hover with multiline underline with stagger' />
     </main>
   )
 }
