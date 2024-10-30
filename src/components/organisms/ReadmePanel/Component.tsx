@@ -9,6 +9,8 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer"
+import { FormattedText } from "@components/organisms/Timeline/FormattedText/Component"
+
 
 interface Props {
   title: string
@@ -23,7 +25,9 @@ export const ReadmePanel = ({ title, description }: Props): JSX.Element => {
       <DrawerContent>
         <DrawerHeader>
           <DrawerTitle>{ title}</DrawerTitle>
-          <DrawerDescription>{description}</DrawerDescription>
+          <DrawerDescription>
+            <FormattedText html={description} />
+          </DrawerDescription>
         </DrawerHeader>
         <DrawerFooter>
           <DrawerClose>

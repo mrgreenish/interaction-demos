@@ -11,6 +11,9 @@ export default function Home () {
       </div>
       <ul className={styles.grid}>
         <li className={styles.card}>
+          <a href='/timeline-start'>Timeline getting started</a>
+        </li>
+        <li className={styles.card}>
           <a href='/timeline-basics'>Timeline basics</a>
         </li>
         <li className={styles.card}>
