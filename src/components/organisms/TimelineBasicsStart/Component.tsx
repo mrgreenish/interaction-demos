@@ -1,12 +1,10 @@
 "use client";
 
 import React, { useRef } from "react";
-import gsap, { random } from "gsap";
+import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import { ReadmePanel } from "../ReadmePanel/Component";
+import { ReadmePanel } from "@components/organisms/ReadmePanel/Component";
 import { GSDevTools } from "../../../lib/gsap/GSDevTools";
-import clsx from "clsx";
-import styles from "./styles.module.css";
 
 gsap.registerPlugin(GSDevTools);
 
@@ -63,13 +61,13 @@ export default function TimelineBasicsStart(): JSX.Element {
 
   useGSAP(
     () => {
-      gsap.from('.box', {
+      gsap.from(".box", {
         opacity: 0,
         y: -50,
         duration: 0.5,
         stagger: 0.2,
         repeat: -1,
-        yoyo: true
+        yoyo: true,
       });
     },
     { scope: el5 }
@@ -78,12 +76,12 @@ export default function TimelineBasicsStart(): JSX.Element {
   useGSAP(
     () => {
       const moveTl = gsap.timeline();
-      moveTl.to('.box', { x: 200, duration: 1 });
-      moveTl.to('.circle', { x: 200, duration: 1 }, '-=0.5');
+      moveTl.to(".box", { x: 200, duration: 1 });
+      moveTl.to(".circle", { x: 200, duration: 1 }, "-=0.5");
 
       const rotateTl = gsap.timeline();
-      rotateTl.to('.box', { rotation: 180, duration: 1 });
-      rotateTl.to('.circle', { rotation: -180, duration: 1 }, '-=0.5');
+      rotateTl.to(".box", { rotation: 180, duration: 1 });
+      rotateTl.to(".circle", { rotation: -180, duration: 1 }, "-=0.5");
 
       const masterTl = gsap.timeline({ repeat: -1, yoyo: true });
       masterTl.add(moveTl);
@@ -217,7 +215,11 @@ export default function TimelineBasicsStart(): JSX.Element {
       </article>
       <br />
       <article>
-        <h2> Advanced Timeline Features, labels and overlapping animations inside a timeline</h2>
+        <h2>
+          {" "}
+          Advanced Timeline Features, labels and overlapping animations inside a
+          timeline
+        </h2>
         <section>
           <div
             className="flex items-center justify-center min-h-[50vh] border border-purple-300 relative"
@@ -251,14 +253,16 @@ export default function TimelineBasicsStart(): JSX.Element {
       <br />
       <article>
         <h2>Staggered Animations</h2>
-        <p>Do a same animation for all selected elements but with a time offset</p>
+        <p>
+          Do a same animation for all selected elements but with a time offset
+        </p>
         <section>
           <div
             className="flex items-center justify-center min-h-[50vh] border border-purple-300 relative"
             ref={el5}
           >
             {[...Array(20)].map((_, i) => (
-            <div className="box w-3 h-3 bg-sunset-100"></div>
+              <div className="box w-3 h-3 bg-sunset-100"></div>
             ))}
           </div>
         </section>
