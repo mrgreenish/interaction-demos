@@ -1,3 +1,5 @@
+'use client'
+
 import { useState, useEffect, useRef } from 'react'
 import Bowser from 'bowser'
 import { hasValue } from './helpers'

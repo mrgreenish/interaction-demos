@@ -262,7 +262,7 @@ export default function TimelineBasicsStart(): JSX.Element {
             ref={el5}
           >
             {[...Array(20)].map((_, i) => (
-              <div className="box w-3 h-3 bg-sunset-100"></div>
+              <div key={i} className="box w-3 h-3 bg-sunset-100"></div>
             ))}
           </div>
         </section>
