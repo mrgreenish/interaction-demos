@@ -26,36 +26,44 @@ export default function AnimatedLines (props: Props): JSX.Element {
 
   const splittext = (): void => {
     if (hasValue(elementRef.current) && hasValue(elementRef.current.children)) {
-      st.current = new SplitText(elementRef.current.children, { type: 'lines', linesClass: clsx(styles.lines, (hasValue(classLines) ? classLines : 'reference-lines') + ' js-lines') })
+      st.current = new SplitText(elementRef.current.children, { 
+        type: 'lines', 
+        linesClass: clsx('js-lines', styles.lines, hasValue(classLines) ? classLines : 'reference-lines') 
+      })
       return
     }
 
-    st.current = new SplitText(elementRef.current, { type: 'lines', linesClass: (hasValue(classLines) ? classLines : 'reference-lines') + ' js-lines' })
+    st.current = new SplitText(elementRef.current, { 
+      type: 'lines', 
+      linesClass: clsx('js-lines', styles.lines, hasValue(classLines) ? classLines : 'reference-lines') 
+    })
   }
 
   const timeline = (): void => {
     if (hasValue(tl.current)) tl.current.kill()
     tl.current = gsap.timeline({ paused: true })
-    tl.current.fromTo(header.current((hasValue(classLines) ? '.' + classLines : '.reference-lines')), { '--line-scale': 0 }, { '--line-scale': 1, stagger: { amount: 0.3 } }, 'in')
+    tl.current.fromTo('.js-lines', 
+      { '--line-scale': 0 }, 
+      { '--line-scale': 1, stagger: { amount: 0.3 }, ease: 'power2.out' }
+    )
   }
 
   useEffect(() => {
     header.current = gsap.utils.selector(elementRef)
 
     document.fonts.ready.then(function (): void {
-      if (document.fonts.check('5rem Helvetica Now Text W05')) {
-        gsap.delayedCall(0.2, splittext)
-        gsap.delayedCall(0.5, timeline)
-      }
+      splittext()
+      timeline()
     }).catch(() => {
-      gsap.delayedCall(0.2, splittext)
-      gsap.delayedCall(0.5, timeline)
+      splittext()
+      timeline()
     })
+    
     return () => {
       if (hasValue(tl.current)) tl.current.kill()
-      if (hasValue(st.current)) st.current = null
+      if (hasValue(st.current)) st.current.revert()
     }
-  }, [splittext, timeline])
+  }, [])
 
   useEffect(() => {
     if (hasValue(st.current)) {

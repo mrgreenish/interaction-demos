@@ -163,7 +163,7 @@ export default function TimelineBasicsStart(): JSX.Element {
       <br />
       <article>
         <h2>Example 3: Controlling Timeline Playback</h2>
-        <p></p>
+        <p>This example demonstrates how to control a timeline with play, pause, reverse, and rewind functionality using a paused timeline.</p>
         <section>
           <div
             className="flex items-center justify-center min-h-[50vh] border border-purple-300"
@@ -199,27 +199,31 @@ export default function TimelineBasicsStart(): JSX.Element {
           </div>
         </section>
         <ReadmePanel
-          title="Simple rotation"
+          title="Timeline Control"
           description={`
             <pre><code>
-            useGSAP(() => {
-              if (tl3Ref.current) tl3Ref.current.kill();
-              tl3Ref.current = gsap.timeline({ paused: true });
-              tl3Ref.current.to('.box', { x: 300, duration: 1 });
-              tl3Ref.current.to('.box', { rotation: 360, duration: 1 });
-              },
-              { scope: el3 }
-              );
-              </pre></code>`}
+            // Create a paused timeline
+            const tl = gsap.timeline({ paused: true });
+            
+            // Add animations to the timeline
+            tl.to('.box', { x: 300, duration: 1 });
+            tl.to('.box', { rotation: 360, duration: 1 });
+            
+            // Control functions
+            const handlePlay = () => tl.play();
+            const handlePause = () => tl.pause();
+            const handleReverse = () => tl.reverse();
+            const handleRewind = () => tl.seek(0).play();
+            </code></pre>`}
         />
       </article>
       <br />
       <article>
         <h2>
-          {" "}
           Advanced Timeline Features, labels and overlapping animations inside a
           timeline
         </h2>
+        <p>This example shows how to use timeline labels to create synchronized and overlapping animations between multiple elements, with yoyo and repeat effects.</p>
         <section>
           <div
             className="flex items-center justify-center min-h-[50vh] border border-purple-300 relative"
