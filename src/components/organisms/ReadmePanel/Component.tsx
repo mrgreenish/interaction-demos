@@ -30,7 +30,7 @@ export const ReadmePanel = ({ title, description }: Props): JSX.Element => {
           </DrawerHeader>
           <DrawerFooter>
             <DrawerClose>
-              <Button variant="outline">Cancel</Button>
+              <Button variant="outline">Close</Button>
             </DrawerClose>
           </DrawerFooter>
         </div>
