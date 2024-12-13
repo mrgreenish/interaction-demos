@@ -100,11 +100,6 @@ export default function TimelineBasics (): JSX.Element {
 
   return (
     <div ref={elRef} className='opacity-0'>
-      <h2>Timeline Basics</h2>
-      <p>
-        Timeline is a powerful tool that allows you to create complex animations
-        with precise control over timing and sequencing.
-      </p>
       <div className='relative w-[100vw] h-[100vh]'>
         <div className='w-10 h-10 bg-pink-100 top-10 absolute js-box'></div>
         <div className='w-10 h-10 bg-pink-200 top-10 absolute js-box'></div>

@@ -6,7 +6,7 @@ import pageStyles from './page.module.css'
 export default function Home () {
   return (
     <main className={styles.main}>
-      <Navigation description='Text animation when in view., scroll bellow the content to see when on scroll' />
+      <Navigation description='A simple timeline util that lets you play, pause, reverse, restart, and scrub the timeline.' />
       <br />
       <br />
       <TimelineBasics />

@@ -103,17 +103,20 @@ export function MouseFollowComponent (props: { children: React.ReactNode }): JSX
   }, [])
 
   return (
-    <div
-      className={styles.wrapper}
-      onMouseMove={mouseMoveHandler}
-      onMouseEnter={mouseEnterHandler}
-      onMouseLeave={mouseleaveHandler}
-      ref={elRef}
-    >
-      <div className={styles.pointer} ref={popupRef}>
-        {props.children}
+    <>
+      <div
+        className={styles.wrapper}
+        onMouseMove={mouseMoveHandler}
+        onMouseEnter={mouseEnterHandler}
+        onMouseLeave={mouseleaveHandler}
+        ref={elRef}
+      >
+        <div className={styles.pointer} ref={popupRef}>
+          {props.children}
+        </div>
       </div>
-    </div>
+
+    </>
   )
 }
 

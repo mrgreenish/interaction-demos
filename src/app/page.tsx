@@ -14,7 +14,7 @@ export default function Home () {
           <a href='/timeline-start'>Timeline getting started</a>
         </li>
         <li className={styles.card}>
-          <a href='/timeline-basics'>Timeline basics</a>
+          <a href='/timelline-dev-control'>Timeline dev control</a>
         </li>
         <li className={styles.card}>
           <a href='/multiline-underline'>Multi line hover</a>

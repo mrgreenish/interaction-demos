@@ -1,4 +1,3 @@
-import Head from "next/head";
 import clsx from "clsx";
 import Cursor from "@components/molecules/CustomCursor/Cursor/Component";
 import { CurrentCursorDisplay } from "@components/molecules/CustomCursor/CurrentCursorDisplay/Component";

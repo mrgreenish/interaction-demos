@@ -208,9 +208,11 @@ const CursorPointerComponent: React.FC = () => {
     }
   }, [currentCursor, draw]);
   return (
-    <div className={s.cursor} ref={elRef}>
-      <canvas className={s.canvas} ref={canvasRef} />
-    </div>
+    <>
+      <div className={s.cursor} ref={elRef}>
+        <canvas className={s.canvas} ref={canvasRef} />
+      </div>
+    </>
   );
 };
 

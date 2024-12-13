@@ -7,10 +7,9 @@ import {
   DrawerFooter,
   DrawerHeader,
   DrawerTitle,
-  DrawerTrigger,
 } from "@/components/ui/drawer"
 import { FormattedText } from "@components/organisms/Timeline/FormattedText/Component"
-
+import { MoreDetailsButton } from "@/components/atoms/MoreDetailsButton/Component"
 
 interface Props {
   title: string
@@ -18,24 +17,24 @@ interface Props {
 }
 
 export const ReadmePanel = ({ title, description }: Props): JSX.Element => {
-
   return (
     <Drawer>
-      <DrawerTrigger>More details</DrawerTrigger>
-      <DrawerContent>
-        <DrawerHeader>
-          <DrawerTitle>{ title}</DrawerTitle>
-          <DrawerDescription>
-            <FormattedText html={description} />
-          </DrawerDescription>
-        </DrawerHeader>
-        <DrawerFooter>
-          <DrawerClose>
-            <Button variant="outline">Cancel</Button>
-          </DrawerClose>
-        </DrawerFooter>
+      <MoreDetailsButton />
+      <DrawerContent className="max-h-[100vh] overflow-hidden">
+        <div className="max-h-[calc(100vh-4rem)] overflow-y-auto scrollbar-hide">
+          <DrawerHeader>
+            <DrawerTitle>{title}</DrawerTitle>
+            <DrawerDescription>
+              <FormattedText html={description} />
+            </DrawerDescription>
+          </DrawerHeader>
+          <DrawerFooter>
+            <DrawerClose>
+              <Button variant="outline">Cancel</Button>
+            </DrawerClose>
+          </DrawerFooter>
+        </div>
       </DrawerContent>
     </Drawer>
   )
-
 }
